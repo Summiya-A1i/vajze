@@ -9,15 +9,15 @@
         body, html { 
             height: 100%; 
             font-family: 'Georgia', serif; 
-            background-color: #0c050d; /* Royal dark orchid / midnight black */
-            color: #f7e7ce; /* Ethereal chiffon cream gold text */
+            background-color: #f3e5eb; /* Soft pastel blossom base tint */
+            color: #4a3740; /* Soft charcoal-plum text for clean readability */
             overflow-x: hidden; 
         }
         
-        /* Background overlay with your custom background photo */
+        /* Background view using your new landscape photo */
         .page-bg { 
             min-height: 100vh; 
-            background: linear-gradient(rgba(12, 5, 13, 0.93), rgba(12, 5, 13, 0.96)), url('images/bg-front.jpg') center/cover no-repeat fixed; 
+            background: linear-gradient(rgba(255, 245, 247, 0.78), rgba(255, 245, 247, 0.88)), url('images/bg-front.jpg') center/cover no-repeat fixed; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
@@ -36,56 +36,62 @@
             position: fixed; 
             top: 0; 
             left: 0; 
-            background: linear-gradient(rgba(12, 5, 13, 0.85), rgba(12, 5, 13, 0.93)), url('images/bg-front.jpg') center/cover no-repeat; 
+            background: linear-gradient(rgba(255, 245, 247, 0.5), rgba(255, 245, 247, 0.7)), url('images/bg-front.jpg') center/cover no-repeat; 
             z-index: 100; 
-            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s; 
+            transition: opacity 1s ease, visibility 1s; 
             padding: 20px; 
         }
         .gate-title { 
             font-size: 2.2rem; 
-            color: #e5c158; /* Liquid Palace Gold */
-            margin-bottom: 25px; 
+            color: #ffffff; 
+            margin-bottom: 30px; 
             font-weight: normal;
             letter-spacing: 2px;
-            text-shadow: 0 0 12px rgba(229, 193, 88, 0.5), 0 0 25px rgba(255, 105, 180, 0.3); /* Gold + Pink underglow */
+            text-shadow: 0 2px 8px rgba(74, 55, 64, 0.25), 0 0 20px rgba(255, 255, 255, 0.6);
         }
         .pass-box { 
-            background: rgba(255, 255, 255, 0.02); 
-            border: 1px solid #e5c158; /* Gold Border */
+            background: rgba(255, 255, 255, 0.75); 
+            border: 1px solid rgba(255, 255, 255, 0.8); 
             padding: 14px 20px; 
-            border-radius: 30px; /* Rounded scroll style */
-            color: #ffffff; 
+            border-radius: 30px; 
+            color: #4a3740; 
             font-size: 1rem; 
             text-align: center; 
             outline: none; 
             margin-bottom: 25px; 
             width: 260px; 
             letter-spacing: 2px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(74, 55, 64, 0.05);
             transition: all 0.4s; 
         }
         .pass-box:focus { 
-            box-shadow: 0 0 20px rgba(229, 193, 88, 0.4), inset 0 0 10px rgba(255, 105, 180, 0.2); 
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(255, 182, 193, 0.4); 
         }
         .unlock-btn { 
-            background: transparent; 
-            color: #e5c158; 
-            border: 1px solid #e5c158; 
+            background: rgba(255, 255, 255, 0.85); 
+            color: #4a3740; 
+            border: 1px solid rgba(255, 255, 255, 0.5); 
             padding: 12px 40px; 
             font-size: 0.9rem; 
             cursor: pointer; 
             border-radius: 30px; 
             text-transform: uppercase; 
             letter-spacing: 2px; 
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(74, 55, 64, 0.08);
             transition: all 0.4s ease; 
         }
         .unlock-btn:hover { 
-            background-color: #e5c158; 
-            color: #0c050d; 
-            box-shadow: 0 0 25px rgba(229, 193, 88, 0.7); 
+            background-color: #ffffff; 
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(255, 182, 193, 0.5); 
         }
-        .error-msg { color: #ff5c5c; font-size: 0.85rem; margin-top: 15px; min-height: 20px; font-style: italic; }
+        .error-msg { color: #cc3333; font-size: 0.85rem; margin-top: 15px; min-height: 20px; font-weight: 500; }
 
-        /* THE 7 CHAPTERS MAIN MENU */
+        /* MAIN APP MENU */
         .menu-container { 
             width: 100%; 
             max-width: 900px; 
@@ -97,66 +103,69 @@
         .menu-title { 
             font-size: 2.2rem; 
             margin-bottom: 5px; 
-            color: #ffffff; 
+            color: #4a3740; 
             text-align: left;
             padding-left: 10px;
             letter-spacing: 1px;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
         }
         .menu-subtitle {
             font-size: 0.95rem;
-            color: #e5c158; /* Gold sub-indicator */
+            color: #8c6d7c; 
             text-align: left;
             margin-bottom: 25px;
             padding-left: 10px;
             letter-spacing: 0.5px;
         }
         
-        /* Ornate Fantasy Divider Line */
+        /* Soft Elegant Floral Ribbon Divider */
         .divider-line {
             height: 1px;
-            background: linear-gradient(to right, transparent, #e5c158, transparent);
+            background: linear-gradient(to right, transparent, rgba(74, 55, 64, 0.2), transparent);
             margin-bottom: 35px;
             width: 100%;
             position: relative;
         }
         .divider-line::after {
-            content: '🌸'; /* Elegant lotus center anchor */
+            content: '🌸'; 
             position: absolute;
-            top: -10px;
+            top: -11px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 0.9rem;
+            filter: drop-shadow(0 1px 2px rgba(255,255,255,0.8));
         }
 
         .grid-layout { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 10px; }
         
-        /* Xianxia Ornate Mirror Card Layout */
+        /* Translucent Frosted Glass Cards */
         .magic-box { 
-            background: rgba(229, 193, 88, 0.02); /* Faint Gold Mist */
-            border: 1px solid rgba(229, 193, 88, 0.15); /* Filigree Gold Wireframe Border */
-            border-radius: 4px; 
+            background: rgba(255, 255, 255, 0.45); 
+            border: 1px solid rgba(255, 255, 255, 0.6); 
+            border-radius: 12px; 
             padding: 25px 20px; 
             text-align: left; 
             cursor: pointer; 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
             display: flex;
             align-items: center;
             gap: 20px;
-            box-shadow: inset 0 0 15px rgba(255, 105, 180, 0.02);
+            box-shadow: 0 4px 15px rgba(74, 55, 64, 0.03);
         }
         .magic-box:hover { 
-            transform: translateY(-4px); 
-            background: rgba(229, 193, 88, 0.06); 
-            border-color: #e5c158;
-            box-shadow: 0 0 20px rgba(229, 193, 88, 0.25), inset 0 0 10px rgba(255, 105, 180, 0.05);
+            transform: translateY(-3px); 
+            background: rgba(255, 255, 255, 0.75); 
+            border-color: rgba(255, 182, 193, 0.6);
+            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.25);
         }
         .box-icon { 
             font-size: 1.8rem; 
-            filter: drop-shadow(0 0 5px rgba(229, 193, 88, 0.4));
         }
         .box-text-content { display: flex; flex-direction: column; }
-        .box-name { font-size: 1.15rem; color: #ffffff; font-weight: normal; letter-spacing: 1px; margin-bottom: 4px; }
-        .box-desc { font-size: 0.85rem; color: #bcaaa4; font-style: italic; }
+        .box-name { font-size: 1.15rem; color: #4a3740; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .box-desc { font-size: 0.85rem; color: #7a6570; }
 
         @media (min-width: 768px) { 
             .grid-layout { grid-template-columns: repeat(2, 1fr); } 
@@ -170,15 +179,15 @@
         <!-- Secure Password Gate -->
         <div class="gate-container" id="gatePage">
             <h1 class="gate-title">The Garden of Whispers ✨</h1>
-            <input type="password" id="passwordField" class="pass-box" placeholder="Enter Access Token...">
+            <input type="password" id="passwordField" class="pass-box" placeholder="Enter Access Key...">
             <button class="unlock-btn" onclick="checkPassword()">Break the Seal</button>
             <div id="errorTxt" class="error-msg"></div>
         </div>
 
-        <!-- Dashboard Dashboard Menu -->
+        <!-- Main Chapter Selector Grid -->
         <div class="menu-container" id="mainMenu">
             <h2 class="menu-title">Greetings, Vajze 🌟</h2>
-            <p class="menu-subtitle">Unlocking the eternal memory scrolls hidden within this dynamic vault.</p>
+            <p class="menu-subtitle">Unlocking the memory scrolls safely preserved inside this space.</p>
             <div class="divider-line"></div>
             
             <div class="grid-layout">
@@ -238,7 +247,3 @@
     <script>
         function checkPassword() {
             var input = document.getElementById("passwordField").value;
-            var error = document.getElementById("errorTxt");
-            
-            if(input === "16") {
-                var gate = document.getElementById("gatePage");
