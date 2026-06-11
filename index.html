@@ -9,12 +9,11 @@
         body, html { 
             height: 100%; 
             font-family: 'Georgia', serif; 
-            background-color: #f3e5eb; /* Soft pastel blossom base tint */
-            color: #4a3740; /* Soft charcoal-plum text for clean readability */
+            background-color: #f3e5eb; 
+            color: #4a3740; 
             overflow-x: hidden; 
         }
         
-        /* Background view using your new landscape photo */
         .page-bg { 
             min-height: 100vh; 
             background: linear-gradient(rgba(255, 245, 247, 0.78), rgba(255, 245, 247, 0.88)), url('images/bg-front.jpg') center/cover no-repeat fixed; 
@@ -24,7 +23,6 @@
             padding: 20px; 
         }
         
-        /* CHINESE FANTASY PASSWORD GATE */
         .gate-container { 
             display: flex; 
             flex-direction: column; 
@@ -91,7 +89,6 @@
         }
         .error-msg { color: #cc3333; font-size: 0.85rem; margin-top: 15px; min-height: 20px; font-weight: 500; }
 
-        /* MAIN APP MENU */
         .menu-container { 
             width: 100%; 
             max-width: 900px; 
@@ -118,7 +115,6 @@
             letter-spacing: 0.5px;
         }
         
-        /* Soft Elegant Floral Ribbon Divider */
         .divider-line {
             height: 1px;
             background: linear-gradient(to right, transparent, rgba(74, 55, 64, 0.2), transparent);
@@ -138,7 +134,6 @@
 
         .grid-layout { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 10px; }
         
-        /* Translucent Frosted Glass Cards */
         .magic-box { 
             background: rgba(255, 255, 255, 0.45); 
             border: 1px solid rgba(255, 255, 255, 0.6); 
@@ -160,9 +155,7 @@
             border-color: rgba(255, 182, 193, 0.6);
             box-shadow: 0 8px 25px rgba(255, 182, 193, 0.25);
         }
-        .box-icon { 
-            font-size: 1.8rem; 
-        }
+        .box-icon { font-size: 1.8rem; }
         .box-text-content { display: flex; flex-direction: column; }
         .box-name { font-size: 1.15rem; color: #4a3740; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; }
         .box-desc { font-size: 0.85rem; color: #7a6570; }
@@ -176,7 +169,6 @@
 <body>
 
     <div class="page-bg">
-        <!-- Secure Password Gate -->
         <div class="gate-container" id="gatePage">
             <h1 class="gate-title">The Garden of Whispers ✨</h1>
             <input type="password" id="passwordField" class="pass-box" placeholder="Enter Access Key...">
@@ -184,7 +176,6 @@
             <div id="errorTxt" class="error-msg"></div>
         </div>
 
-        <!-- Main Chapter Selector Grid -->
         <div class="menu-container" id="mainMenu">
             <h2 class="menu-title">Greetings, Vajze 🌟</h2>
             <p class="menu-subtitle">Unlocking the memory scrolls safely preserved inside this space.</p>
@@ -247,3 +238,12 @@
     <script>
         function checkPassword() {
             var input = document.getElementById("passwordField").value;
+            var error = document.getElementById("errorTxt");
+            
+            // PASSWORD IS RIGHT HERE ON LINE 186:
+            if(input === "16") {
+                var gate = document.getElementById("gatePage");
+                var menu = document.getElementById("mainMenu");
+                gate.style.opacity = "0";
+                setTimeout(function() {
+                    gate.style.visibility = "hidden";
