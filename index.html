@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Midnight Mirror</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { 
+            height: 100%; 
+            font-family: 'Georgia', serif; 
+            background-color: #0c050d; /* Royal dark orchid / midnight black */
+            color: #f7e7ce; /* Ethereal chiffon cream gold text */
+            overflow-x: hidden; 
+        }
+        
+        /* Background overlay with your custom background photo */
+        .page-bg { 
+            min-height: 100vh; 
+            background: linear-gradient(rgba(12, 5, 13, 0.93), rgba(12, 5, 13, 0.96)), url('images/bg-front.jpg') center/cover no-repeat fixed; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px; 
+        }
+        
+        /* CHINESE FANTASY PASSWORD GATE */
+        .gate-container { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            height: 100vh; 
+            width: 100%; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            background: linear-gradient(rgba(12, 5, 13, 0.85), rgba(12, 5, 13, 0.93)), url('images/bg-front.jpg') center/cover no-repeat; 
+            z-index: 100; 
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s; 
+            padding: 20px; 
+        }
+        .gate-title { 
+            font-size: 2.2rem; 
+            color: #e5c158; /* Liquid Palace Gold */
+            margin-bottom: 25px; 
+            font-weight: normal;
+            letter-spacing: 2px;
+            text-shadow: 0 0 12px rgba(229, 193, 88, 0.5), 0 0 25px rgba(255, 105, 180, 0.3); /* Gold + Pink underglow */
+        }
+        .pass-box { 
+            background: rgba(255, 255, 255, 0.02); 
+            border: 1px solid #e5c158; /* Gold Border */
+            padding: 14px 20px; 
+            border-radius: 30px; /* Rounded scroll style */
+            color: #ffffff; 
+            font-size: 1rem; 
+            text-align: center; 
+            outline: none; 
+            margin-bottom: 25px; 
+            width: 260px; 
+            letter-spacing: 2px;
+            transition: all 0.4s; 
+        }
+        .pass-box:focus { 
+            box-shadow: 0 0 20px rgba(229, 193, 88, 0.4), inset 0 0 10px rgba(255, 105, 180, 0.2); 
+        }
+        .unlock-btn { 
+            background: transparent; 
+            color: #e5c158; 
+            border: 1px solid #e5c158; 
+            padding: 12px 40px; 
+            font-size: 0.9rem; 
+            cursor: pointer; 
+            border-radius: 30px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            transition: all 0.4s ease; 
+        }
+        .unlock-btn:hover { 
+            background-color: #e5c158; 
+            color: #0c050d; 
+            box-shadow: 0 0 25px rgba(229, 193, 88, 0.7); 
+        }
+        .error-msg { color: #ff5c5c; font-size: 0.85rem; margin-top: 15px; min-height: 20px; font-style: italic; }
+
+        /* THE 7 CHAPTERS MAIN MENU */
+        .menu-container { 
+            width: 100%; 
+            max-width: 900px; 
+            margin: 40px auto; 
+            display: none; 
+            opacity: 0; 
+            transition: opacity 1s ease-in-out; 
+        }
+        .menu-title { 
+            font-size: 2.2rem; 
+            margin-bottom: 5px; 
+            color: #ffffff; 
+            text-align: left;
+            padding-left: 10px;
+            letter-spacing: 1px;
+        }
+        .menu-subtitle {
+            font-size: 0.95rem;
+            color: #e5c158; /* Gold sub-indicator */
+            text-align: left;
+            margin-bottom: 25px;
+            padding-left: 10px;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Ornate Fantasy Divider Line */
+        .divider-line {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e5c158, transparent);
+            margin-bottom: 35px;
+            width: 100%;
+            position: relative;
+        }
+        .divider-line::after {
+            content: '🌸'; /* Elegant lotus center anchor */
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+        }
+
+        .grid-layout { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 10px; }
+        
+        /* Xianxia Ornate Mirror Card Layout */
+        .magic-box { 
+            background: rgba(229, 193, 88, 0.02); /* Faint Gold Mist */
+            border: 1px solid rgba(229, 193, 88, 0.15); /* Filigree Gold Wireframe Border */
+            border-radius: 4px; 
+            padding: 25px 20px; 
+            text-align: left; 
+            cursor: pointer; 
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: inset 0 0 15px rgba(255, 105, 180, 0.02);
+        }
+        .magic-box:hover { 
+            transform: translateY(-4px); 
+            background: rgba(229, 193, 88, 0.06); 
+            border-color: #e5c158;
+            box-shadow: 0 0 20px rgba(229, 193, 88, 0.25), inset 0 0 10px rgba(255, 105, 180, 0.05);
+        }
+        .box-icon { 
+            font-size: 1.8rem; 
+            filter: drop-shadow(0 0 5px rgba(229, 193, 88, 0.4));
+        }
+        .box-text-content { display: flex; flex-direction: column; }
+        .box-name { font-size: 1.15rem; color: #ffffff; font-weight: normal; letter-spacing: 1px; margin-bottom: 4px; }
+        .box-desc { font-size: 0.85rem; color: #bcaaa4; font-style: italic; }
+
+        @media (min-width: 768px) { 
+            .grid-layout { grid-template-columns: repeat(2, 1fr); } 
+            .magic-box:nth-child(7) { grid-column: span 2; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-bg">
+        <!-- Secure Password Gate -->
+        <div class="gate-container" id="gatePage">
+            <h1 class="gate-title">The Garden of Whispers ✨</h1>
+            <input type="password" id="passwordField" class="pass-box" placeholder="Enter Access Token...">
+            <button class="unlock-btn" onclick="checkPassword()">Break the Seal</button>
+            <div id="errorTxt" class="error-msg"></div>
+        </div>
+
+        <!-- Dashboard Dashboard Menu -->
+        <div class="menu-container" id="mainMenu">
+            <h2 class="menu-title">Greetings, Vajze 🌟</h2>
+            <p class="menu-subtitle">Unlocking the eternal memory scrolls hidden within this dynamic vault.</p>
+            <div class="divider-line"></div>
+            
+            <div class="grid-layout">
+                <div class="magic-box" onclick="location.href='box1.html'">
+                    <span class="box-icon">📖</span>
+                    <div class="box-text-content">
+                        <h3 class="box-name">The Shared Journey</h3>
+                        <p class="box-desc">Our roommate chronicle scrapbook scrolls</p>
+                    </div>
+                </div>
+                <div class="magic-box" onclick="location.href='box2.html'">
+                    <span class="box-icon">✨</span>
+                    <div class="box-text-content">
+                        <h3 class="box-name">The Portrait Gallery</h3>
+                        <p class="box-desc">Your personal visual vault archive</p>
+                    </div>
+                </div>
+                <div class="magic-box" onclick="location.href='box3.html'">
+                    <span class="box-icon">🎥</span>
+                    <div class="box-text-content">
+                        <h3 class="box-name">The Video Archive</h3>
+                        <p class="box-desc">Custom processed short edits</p>
+                    </div>
+                </div>
+                <div class="magic-box" onclick="location.href='box4.html'">
+                    <span class="box-icon">⚡</span>
+                    <div class="box-text-content">
+                        <h3 class="box-name">The Milestone Chronicle</h3>
+                        <p class="box-desc">Celebrating academic focus and honors</p>
+                    </div>
+                </div>
+                <div class="magic-box" onclick="location.href='box5.html'">
+                    <span class="box-icon">💻</span>
+                    <div class="box-text-content">
+                        <h3 class="box-name">The Character Profile</h3>
+                        <p class="box-desc">Daily active traits and custom markers</p>
+                    </div>
+                </div>
+                <div class="magic-box" onclick="location.href='box6.html'">
+                    <span class="box-icon">⏳</span>
+                    <div class="box-text-content">
+                        <h3 class="box-name">The Timeline</h3>
+                        <p class="box-desc">A respectful progression tracking key life phases</p>
+                    </div>
+                </div>
+                <div class="magic-box" onclick="location.href='box7.html'">
+                    <span class="box-icon">🗝️</span>
+                    <div class="box-text-content">
+                        <h3 class="box-name">The Vault of Cards</h3>
+                        <p class="box-desc">Secure letters reserved for selected occasions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            var input = document.getElementById("passwordField").value;
+            var error = document.getElementById("errorTxt");
+            
+            if(input === "16") {
+                var gate = document.getElementById("gatePage");
